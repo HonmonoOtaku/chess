@@ -9,7 +9,8 @@ RESULT_DIR = result_file
 
 #can be modified
 DIRS = ./src/play_board \
-	   ./src \
+	   ./src/error_handle \
+	   ./src/main \
 	   ./RESULT_DIR
 	
 
