@@ -8,7 +8,8 @@ DEPEND_FILE = depend_file
 RESULT_DIR = result_file
 
 #can be modified
-DIRS = ./src/play_board \
+DIRS = ./src/chess_board \
+	   ./src/chess_pieces \
 	   ./src/error_handle \
 	   ./src/main \
 	   ./RESULT_DIR
