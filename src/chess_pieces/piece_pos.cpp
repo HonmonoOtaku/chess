@@ -19,8 +19,14 @@ Piece_Pos Piece_Pos::operator()(const int x, const int y)
 	return *this;
 }
 
-Chess_Piece::Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos)
-	:m_color(color), m_piece_pos(piece_pos)
+bool operator==(const Piece_Pos& input_1, const Piece_Pos& input_2)
 {
-	m_if_piece_exist = true;
+	if(input_1.x == input_2.x && input_1.y == input_2.y)
+		return true;
+	else
+		return false;
 }
+
+
+
+
