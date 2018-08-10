@@ -49,6 +49,7 @@ public:
 	bool ReturnIfPieceExist(void);
 };
 
+
 class King : public Chess_Piece
 {
 public:
@@ -56,12 +57,60 @@ public:
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
+
 class Queen : public Chess_Piece
 {
 public:
 	Queen(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
+
+
+class Pone : public Chess_Piece
+{
+public:
+	Pone(const Piece_Color color, const Piece_Pos& piece_pos);
+	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
+};
+
+
+class Night : public Chess_Piece
+{
+public:
+	Night(const Piece_Color color, const Piece_Pos& piece_pos);
+	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
+};
+
+
+class Bishop : public Chess_Piece
+{
+public:
+	Bishop(const Piece_Color color, const Piece_Pos& piece_pos);
+	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
+};
+
+
+class Rook : public Chess_Piece
+{
+public:
+	Rook(const Piece_Color color, const Piece_Pos& piece_pos);
+	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

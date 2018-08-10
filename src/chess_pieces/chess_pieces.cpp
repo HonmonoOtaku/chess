@@ -21,8 +21,13 @@ int Chess_Piece::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_
 	
 
 	//y = ax + b
-	// a counld be 0, 1 , -1
-	int a = (destination_pos.x - m_piece_pos.x) / (destination_pos.y - m_piece_pos.x);
+	// a counld be 0, 1 , -1	
+	int a;
+	if(destination_pos.x != m_piece_pos.x) // because divide by zero is not allowed
+		a = (destination_pos.y - m_piece_pos.y) / (destination_pos.x - m_piece_pos.x);
+	else
+		a = 0;
+
 	int b = 0;
 	
 	move_track_list.clear();
@@ -87,7 +92,31 @@ King::King(const Piece_Color color, const Piece_Pos& piece_pos)
 	
 }
 
-King::King(const Piece_Color color, const Piece_Pos& piece_pos)
+Queen::Queen(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos)
+{
+	
+}
+
+Pone::Pone(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos)
+{
+	
+}
+
+Night::Night(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos)
+{
+	
+}
+
+Bishop::Bishop(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos)
+{
+	
+}
+
+Rook::Rook(const Piece_Color color, const Piece_Pos& piece_pos)
 	:Chess_Piece(color, piece_pos)
 {
 	
@@ -112,6 +141,135 @@ int King::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& m
 	return 0;
 }
 
+int Queen::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
+{
+	const Piece_Pos cur_piece_pos = ReturnCurPos();
+
+	if(ReturnIfPieceExist() == false)
+		return -1;
+	
+	if(CheckPosRange(destination_pos) == false)
+		return -1;
+	
+	
+	double slop;
+	if(destination_pos.x != cur_piece_pos.x)
+		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	else
+		slop == 0;
+
+	if(!(slop == 1 | slop == -1 | slop == 0))
+		return -1;
+
+	Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+	
+	return 0;
+}
+int Pone::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
+{
+	const Piece_Pos cur_piece_pos = ReturnCurPos();
+
+	if(ReturnIfPieceExist() == false)
+		return -1;
+	
+	if(CheckPosRange(destination_pos) == false)
+		return -1;
+	
+	
+	double slop;
+	if(destination_pos.x != cur_piece_pos.x)
+		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	else
+		slop == 0;
+
+	if(!(slop == 1 | slop == -1 | slop == 0))
+		return -1;
+
+	if(destination_pos.y - cur_piece_pos.y != 1 | abs(destination_pos.x - cur_piece_pos.x) > 1)
+		return -1;
+		
+
+	Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+	
+	return 0;
+}
+
+int Night::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
+{
+	//because night's track can't be expressed by y = ax + b so this function can't use ReturnTrackList func
+	move_track_list.clear();
+
+	const Piece_Pos cur_piece_pos = ReturnCurPos();
+
+	if(ReturnIfPieceExist() == false)
+		return -1;
+	
+	if(CheckPosRange(destination_pos) == false)
+		return -1;
+	
+	if(abs(destination_pos.x - cur_piece_pos.x) == 1 | abs(destination_pos.y - cur_piece_pos.y) == 2)	
+	{
+		move_track_list.push_back(Piece_Pos(cur_piece_pos.x, (destination_pos.y + cur_piece_pos.y) / 2));
+		move_track_list.push_back(destination_pos);
+	}
+
+	if(abs(destination_pos.x - cur_piece_pos.x) == 2 | abs(destination_pos.y - cur_piece_pos.y) == 1)	
+	{	
+		move_track_list.push_back(Piece_Pos((destination_pos.x + cur_piece_pos.x) / 2, cur_piece_pos.y));
+		move_track_list.push_back(destination_pos);
+	}
+	
+	return 0;
+
+}
+
+int Bishop::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
+{
+	const Piece_Pos cur_piece_pos = ReturnCurPos();
+
+	if(ReturnIfPieceExist() == false)
+		return -1;
+	
+	if(CheckPosRange(destination_pos) == false)
+		return -1;
+	
+	
+	double slop;
+	if(destination_pos.x != cur_piece_pos.x)
+		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	else
+		slop == 0;
+
+	if(!(slop == 1 | slop == -1))
+		return -1;	
+
+	Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+
+}
+
+int Rook::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
+{
+	const Piece_Pos cur_piece_pos = ReturnCurPos();
+
+	if(ReturnIfPieceExist() == false)
+		return -1;
+	
+	if(CheckPosRange(destination_pos) == false)
+		return -1;
+	
+	
+	double slop;
+	if(destination_pos.x != cur_piece_pos.x)
+		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	else
+		slop == 0;
+
+	if(!(slop != 0))
+		return -1;	
+
+	Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+
+}
 
 
 
