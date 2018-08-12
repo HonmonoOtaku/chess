@@ -26,6 +26,10 @@ public:
 	Chess_Board();
 	~Chess_Board();
 
+	int ReturnPieceInfo(const Piece_Pos piece_pos,Chess_Piece_Identifier& chess_piece, Piece_Color& piece_color) const;
+	bool IfPieceExist(const Piece_Pos piece_pos) const;
+	int SearchPiece(const Chess_Piece_Identifier chess_piece, const Piece_Color piece_color, Piece_Pos& piece_pos) const;
+	const Chess_Piece& ReturnPiece(const Piece_Pos piece_pos) const;
 };
 
 #endif //_CHESS_BOARD_H_

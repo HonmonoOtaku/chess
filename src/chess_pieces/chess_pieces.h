@@ -6,10 +6,20 @@
 #include <cmath> // for abs function
 #include "../main/USING_NAMESPACE_STD.h"
 
-enum Piece_Color
+enum class Piece_Color
 {
 	WHITE = 1,
 	BLACK = 0,
+};
+
+enum class Chess_Piece_Identifier
+{
+	QUEEN,
+	KING,
+	ROOK,
+	NIGHT,
+	BISHOP,
+	PONE
 };
 
 class Piece_Pos
@@ -34,12 +44,13 @@ private:
 	Piece_Color m_color;
 	bool m_if_piece_exist;
 	Piece_Pos m_piece_pos;
+	Chess_Piece_Identifier m_piece_identifier;
 
 protected:
 	Piece_Pos  ReturnCurPos(void) const;
 		
 public:
-	Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos);	
+	Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);	
 
 	
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
@@ -47,13 +58,15 @@ public:
 
 	bool ReturnIfPieceExist(void) const;
 	bool ReturnIfPieceExist(void);
+	Chess_Piece_Identifier ReturnPieceIdentifier(void) const;
+	Piece_Color ReturnPieceColor(void) const;	
 };
 
 
 class King : public Chess_Piece
 {
 public:
-	King(const Piece_Color color, const Piece_Pos& piece_pos);
+	King(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -61,15 +74,16 @@ public:
 class Queen : public Chess_Piece
 {
 public:
-	Queen(const Piece_Color color, const Piece_Pos& piece_pos);
+	Queen(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
 
 class Pone : public Chess_Piece
 {
+
 public:
-	Pone(const Piece_Color color, const Piece_Pos& piece_pos);
+	Pone(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -77,7 +91,7 @@ public:
 class Night : public Chess_Piece
 {
 public:
-	Night(const Piece_Color color, const Piece_Pos& piece_pos);
+	Night(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -85,7 +99,7 @@ public:
 class Bishop : public Chess_Piece
 {
 public:
-	Bishop(const Piece_Color color, const Piece_Pos& piece_pos);
+	Bishop(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -93,7 +107,7 @@ public:
 class Rook : public Chess_Piece
 {
 public:
-	Rook(const Piece_Color color, const Piece_Pos& piece_pos);
+	Rook(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 

@@ -1,7 +1,7 @@
 #include "chess_pieces.h"
 
-Chess_Piece::Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos)
-	:m_color(color), m_piece_pos(piece_pos)
+Chess_Piece::Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:m_color(color), m_piece_pos(piece_pos), m_piece_identifier(piece_name)
 {
 	m_if_piece_exist = true;
 }
@@ -86,40 +86,45 @@ bool Chess_Piece::ReturnIfPieceExist(void)
 	return m_if_piece_exist;
 }
 
-King::King(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
+Chess_Piece_Identifier Chess_Piece::ReturnPieceIdentifier(void) const
 {
-	
+	return m_piece_identifier;
 }
 
-Queen::Queen(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
+
+Piece_Color Chess_Piece::ReturnPieceColor(void) const
 {
-	
+	return m_color;
 }
 
-Pone::Pone(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
+King::King(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
 {
-	
 }
 
-Night::Night(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
-{
-	
+Queen::Queen(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
+{	
 }
 
-Bishop::Bishop(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
+Pone::Pone(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
 {
-	
 }
 
-Rook::Rook(const Piece_Color color, const Piece_Pos& piece_pos)
-	:Chess_Piece(color, piece_pos)
+Night::Night(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
 {
-	
+}
+
+Bishop::Bishop(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
+{
+}
+
+Rook::Rook(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
+	:Chess_Piece(color, piece_pos, piece_name)
+{
 }
 
 int King::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
