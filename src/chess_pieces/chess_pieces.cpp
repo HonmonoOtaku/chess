@@ -184,6 +184,18 @@ int Pone::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& m
 	if(!(slop == 1 | slop == -1 | slop == 0))
 		return -1;
 
+	if(ReturnPieceColor() == Piece_Color::WHITE && destination_pos.x == 3 && abs(destination_pos.x - m_piece_pos.x) <= 1)
+	{
+		Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+		return 0;
+	}
+
+	if(ReturnPieceColor() == Piece_Color::BLACK && destination_pos.x == 4 && abs(destination_pos.x - m_piece_pos.x) <= 1)
+	{
+		Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
+		return 0;
+	}
+
 	if(destination_pos.y - m_piece_pos.y != 1 | abs(destination_pos.x - m_piece_pos.x) > 1)
 		return -1;
 		
