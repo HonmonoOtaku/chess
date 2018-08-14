@@ -11,7 +11,8 @@ RESULT_DIR = result_file
 DIRS = ./src/chess_board \
 	   ./src/chess_pieces \
 	   ./src/error_handle \
-	   ./src/chess_piece_mover \
+	   ./src/chess_piece_move_check \
+	   ./src/chess_game_process \
 	   ./src/main \
 	   ./RESULT_DIR
 	

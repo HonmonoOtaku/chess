@@ -6,10 +6,10 @@
 #include <vector>
 
 
-class Chess_Piece_Mover
+class Chess_Piece_Move_Check
 {
 public:
-	bool MoveAllow(const Chess_Piece_Identifier chess_piece, const Piece_Color piece_color, const Piece_Pos destination_pos, const Chess_Board& chess_board) const;
+	bool MoveAllow(const Piece_Pos origin_pos, const Piece_Pos destination_pos, const Chess_Board& chess_board) const;
 };
 
 #endif //_CHESS_PIECE_MOVER_H_

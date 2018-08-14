@@ -19,9 +19,9 @@ public:
 
 class Chess_Board
 {
-private:	
+public:
 	Chess_Piece_Pointer** m_chess_board;
-		
+
 public:
 	Chess_Board();
 	~Chess_Board();
@@ -30,6 +30,10 @@ public:
 	bool IfPieceExist(const Piece_Pos piece_pos) const;
 	int SearchPiece(const Chess_Piece_Identifier chess_piece, const Piece_Color piece_color, Piece_Pos& piece_pos) const;
 	const Chess_Piece& ReturnPiece(const Piece_Pos piece_pos) const;
+
+	friend ostream& operator<<(ostream&, const Chess_Board&);
 };
+
+ostream& operator<<(ostream& os, const Chess_Board& chess_board);
 
 #endif //_CHESS_BOARD_H_

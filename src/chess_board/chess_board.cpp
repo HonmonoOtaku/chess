@@ -70,7 +70,50 @@ const Chess_Piece& Chess_Board::ReturnPiece(const Piece_Pos piece_pos) const
 	return *(m_chess_board[piece_pos.x][piece_pos.y].m_piece);
 }
 
+ostream& operator<<(ostream& os, const Chess_Board& chess_board)
+{
+	Chess_Piece_Identifier piece_name = Chess_Piece_Identifier::PONE;
+	os << "****chess_board*****" << endl;
+	for(int y = 0; y < 8; y++)
+	{
+		for(int x = 0; x < 8; x++)
+		{
+			if(chess_board.m_chess_board[x][y].m_if_piece_exist == false)
+				cout << "*";
+			else
+			{
+				piece_name = chess_board.m_chess_board[x][y].m_piece->ReturnPieceIdentifier();
+				switch(piece_name)
+				{
+					case Chess_Piece_Identifier::PONE:
+						cout << "p";
+						break;
+					case Chess_Piece_Identifier::NIGHT:
+						cout << "n";
+						break;
+					case Chess_Piece_Identifier::BISHOP:
+						cout << "b";
+						break;
+					case Chess_Piece_Identifier::ROOK:
+						cout << "r";
+						break;
+					case Chess_Piece_Identifier::QUEEN:
+						cout << "Q";
+						break;
+					case Chess_Piece_Identifier::KING:
+						cout << "K";
+						break;
+					default:
+						cout << "error" << endl;
+				}
+			}
+		}
 
+		cout << endl;
+	}
+	cout << "*****chess_board*****" << endl;
+	return os;
+}
 
 
 

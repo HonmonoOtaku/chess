@@ -6,10 +6,6 @@ Chess_Piece::Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos, co
 	m_if_piece_exist = true;
 }
 
-Piece_Pos Chess_Piece::ReturnCurPos(void) const
-{
-	return m_piece_pos;
-}
 
 int Chess_Piece::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
@@ -97,48 +93,50 @@ Piece_Color Chess_Piece::ReturnPieceColor(void) const
 	return m_color;
 }
 
-King::King(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Piece_Color Chess_Piece::ReturnPieceColor(void)
+{
+	return m_color;
+}
+
+King::King(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::KING)
 {
 }
 
-Queen::Queen(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Queen::Queen(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::QUEEN)
 {	
 }
 
-Pone::Pone(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Pone::Pone(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::PONE)
 {
 }
 
-Night::Night(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Night::Night(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::NIGHT)
 {
 }
 
-Bishop::Bishop(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Bishop::Bishop(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::BISHOP)
 {
 }
 
-Rook::Rook(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name)
-	:Chess_Piece(color, piece_pos, piece_name)
+Rook::Rook(const Piece_Color color, const Piece_Pos& piece_pos)
+	:Chess_Piece(color, piece_pos, Chess_Piece_Identifier::ROOK)
 {
 }
 
 int King::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
-	
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
 	if(CheckPosRange(destination_pos) == false)
 		return -1;
 
-	if(abs(destination_pos.x - cur_piece_pos.x) > 1 | abs(destination_pos.y - cur_piece_pos.y) > 1)
+	if(abs(destination_pos.x - m_piece_pos.x) > 1 | abs(destination_pos.y - m_piece_pos.y) > 1)
 		return -1;
 	
 	Chess_Piece::ReturnTrackList(destination_pos, move_track_list); 
@@ -148,8 +146,6 @@ int King::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& m
 
 int Queen::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
@@ -158,8 +154,8 @@ int Queen::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& 
 	
 	
 	double slop;
-	if(destination_pos.x != cur_piece_pos.x)
-		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	if(destination_pos.x != m_piece_pos.x)
+		slop = (destination_pos.y - m_piece_pos.y) / (destination_pos.x - m_piece_pos.x);	
 	else
 		slop == 0;
 
@@ -172,8 +168,6 @@ int Queen::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& 
 }
 int Pone::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
@@ -182,15 +176,15 @@ int Pone::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& m
 	
 	
 	double slop;
-	if(destination_pos.x != cur_piece_pos.x)
-		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	if(destination_pos.x != m_piece_pos.x)
+		slop = (destination_pos.y - m_piece_pos.y) / (destination_pos.x - m_piece_pos.x);	
 	else
 		slop == 0;
 
 	if(!(slop == 1 | slop == -1 | slop == 0))
 		return -1;
 
-	if(destination_pos.y - cur_piece_pos.y != 1 | abs(destination_pos.x - cur_piece_pos.x) > 1)
+	if(destination_pos.y - m_piece_pos.y != 1 | abs(destination_pos.x - m_piece_pos.x) > 1)
 		return -1;
 		
 
@@ -204,23 +198,21 @@ int Night::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& 
 	//because night's track can't be expressed by y = ax + b so this function can't use ReturnTrackList func
 	move_track_list.clear();
 
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
 	if(CheckPosRange(destination_pos) == false)
 		return -1;
 	
-	if(abs(destination_pos.x - cur_piece_pos.x) == 1 | abs(destination_pos.y - cur_piece_pos.y) == 2)	
+	if(abs(destination_pos.x - m_piece_pos.x) == 1 | abs(destination_pos.y - m_piece_pos.y) == 2)	
 	{
-		move_track_list.push_back(Piece_Pos(cur_piece_pos.x, (destination_pos.y + cur_piece_pos.y) / 2));
+		move_track_list.push_back(Piece_Pos(m_piece_pos.x, (destination_pos.y + m_piece_pos.y) / 2));
 		move_track_list.push_back(destination_pos);
 	}
 
-	if(abs(destination_pos.x - cur_piece_pos.x) == 2 | abs(destination_pos.y - cur_piece_pos.y) == 1)	
+	if(abs(destination_pos.x - m_piece_pos.x) == 2 | abs(destination_pos.y - m_piece_pos.y) == 1)	
 	{	
-		move_track_list.push_back(Piece_Pos((destination_pos.x + cur_piece_pos.x) / 2, cur_piece_pos.y));
+		move_track_list.push_back(Piece_Pos((destination_pos.x + m_piece_pos.x) / 2, m_piece_pos.y));
 		move_track_list.push_back(destination_pos);
 	}
 	
@@ -230,8 +222,6 @@ int Night::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& 
 
 int Bishop::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
@@ -240,8 +230,8 @@ int Bishop::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>&
 	
 	
 	double slop;
-	if(destination_pos.x != cur_piece_pos.x)
-		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	if(destination_pos.x != m_piece_pos.x)
+		slop = (destination_pos.y - m_piece_pos.y) / (destination_pos.x - m_piece_pos.x);	
 	else
 		slop == 0;
 
@@ -254,8 +244,6 @@ int Bishop::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>&
 
 int Rook::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const
 {
-	const Piece_Pos cur_piece_pos = ReturnCurPos();
-
 	if(ReturnIfPieceExist() == false)
 		return -1;
 	
@@ -264,8 +252,8 @@ int Rook::ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& m
 	
 	
 	double slop;
-	if(destination_pos.x != cur_piece_pos.x)
-		slop = (destination_pos.y - cur_piece_pos.y) / (destination_pos.x - cur_piece_pos.x);	
+	if(destination_pos.x != m_piece_pos.x)
+		slop = (destination_pos.y - m_piece_pos.y) / (destination_pos.x - m_piece_pos.x);	
 	else
 		slop == 0;
 

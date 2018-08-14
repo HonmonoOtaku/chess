@@ -9,7 +9,7 @@ OBJECTS = $(wildcard *.o)
 all : $(TARGET)
 
 $(TARGET) : $(OBJECTS)
-	$(CC) -o $(CFLAGS) $@ $(OBJECTS)
+	$(CC)  $(CFLAGS) -o $@ $(OBJECTS)
 	mv $(TARGET) ../
 
 clean:

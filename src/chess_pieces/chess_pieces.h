@@ -43,11 +43,10 @@ class Chess_Piece
 private:
 	Piece_Color m_color;
 	bool m_if_piece_exist;
-	Piece_Pos m_piece_pos;
 	Chess_Piece_Identifier m_piece_identifier;
 
-protected:
-	Piece_Pos  ReturnCurPos(void) const;
+public:
+	Piece_Pos m_piece_pos;
 		
 public:
 	Chess_Piece(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);	
@@ -60,13 +59,14 @@ public:
 	bool ReturnIfPieceExist(void);
 	Chess_Piece_Identifier ReturnPieceIdentifier(void) const;
 	Piece_Color ReturnPieceColor(void) const;	
+	Piece_Color ReturnPieceColor(void);	
 };
 
 
 class King : public Chess_Piece
 {
 public:
-	King(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	King(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -74,7 +74,7 @@ public:
 class Queen : public Chess_Piece
 {
 public:
-	Queen(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	Queen(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -83,7 +83,7 @@ class Pone : public Chess_Piece
 {
 
 public:
-	Pone(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	Pone(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -91,7 +91,7 @@ public:
 class Night : public Chess_Piece
 {
 public:
-	Night(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	Night(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -99,7 +99,7 @@ public:
 class Bishop : public Chess_Piece
 {
 public:
-	Bishop(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	Bishop(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
@@ -107,7 +107,7 @@ public:
 class Rook : public Chess_Piece
 {
 public:
-	Rook(const Piece_Color color, const Piece_Pos& piece_pos, const Chess_Piece_Identifier piece_name);
+	Rook(const Piece_Color color, const Piece_Pos& piece_pos);
 	virtual int ReturnTrackList(const Piece_Pos& destination_pos, vector<Piece_Pos>& move_track_list) const;
 };
 
