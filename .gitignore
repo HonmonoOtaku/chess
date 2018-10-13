@@ -1,5 +1,6 @@
-.swp
-.o
+*.swp
+*.o
 
 tags
 chess
+depend_file

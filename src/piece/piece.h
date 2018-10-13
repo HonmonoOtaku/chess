@@ -1,7 +1,14 @@
 #ifndef _PIECE_H_
 #define _PIECE_H_
 
+#include <list>
 #include "pos.h"
+
+#ifndef _U_
+#define _U_
+using namespace std;
+#endif //_U_
+
 
 enum class Color
 {
@@ -31,11 +38,11 @@ public:
 
 	void SetPos(const Pos& dest);
 
-	ID getID(void) const;
-	Color getColor(void) const;
-	Pos getPos(void) const;
+	ID GetID(void) const;
+	Color GetColor(void) const;
+	Pos GetPos(void) const;
 
-
+	virtual int GetMoveList(const Pos& dest, list<Pos>& move_list) const = 0;
 };
 
 #endif // _PIECE_H_
