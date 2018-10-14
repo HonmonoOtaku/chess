@@ -35,6 +35,7 @@ private:
 
 public:
 	Piece(const ID id, const Color color, const Pos& pos);
+	virtual ~Piece(){};
 
 	void SetPos(const Pos& dest);
 

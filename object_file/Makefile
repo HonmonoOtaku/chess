@@ -1,8 +1,8 @@
 .SUFFIXES : .cpp.o
 CC = g++
 CFLAGS= -g -Werror -Wall -std=c++11
-
 TARGET = chess
+
 OBJECTS = $(wildcard *.o)
 
 
@@ -12,5 +12,5 @@ $(TARGET) : $(OBJECTS)
 	$(CC) -o ../$@ $(OBJECTS)
 
 clean:
-	del $(OBJECTS) $(TARGET)
+	rm $(OBJECTS) 
 	rm depend_file
