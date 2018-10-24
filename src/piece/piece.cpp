@@ -24,3 +24,11 @@ Pos Piece::GetPos(void) const
 {
 	return m_pos;
 }
+
+Color color::GetReverseColor(const Color color)
+{
+	if(color == Color::W)
+		return Color::B;
+	else
+		return Color::W;
+}

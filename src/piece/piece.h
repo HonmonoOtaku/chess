@@ -16,6 +16,11 @@ enum class Color
 	B
 };
 
+namespace color
+{
+	Color GetReverseColor(const Color color);
+}
+
 enum class ID
 {
 	K,
