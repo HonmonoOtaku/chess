@@ -69,6 +69,21 @@ ID Board::GetID(const Pos& get_pos) const
 }
 
 
+int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const
+{
+	if(IfExist(orig_pos) == false)
+		return -1;
+	
+	if(board[orig_pos.x][orig_pos.y]->GetMoveList(dest_pos, move_list) != 0)
+	{
+		move_list.clear();
+		return -2;
+	}
+
+	return 0;
+}
+
+
 int Board::MovePiece(const Pos& orig, const Pos& dest)
 {
 	if(IfExist(orig) == false)

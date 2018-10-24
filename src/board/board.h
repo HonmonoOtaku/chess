@@ -28,6 +28,8 @@ public:
 	Color GetColor(const Pos& get_pos) const;
 	ID GetID(const Pos& get_pos) const;
 
+	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const;
+
 	int MovePiece(const Pos& orig, const Pos& dest);
 	int ShowBoard(void) const;
 };
