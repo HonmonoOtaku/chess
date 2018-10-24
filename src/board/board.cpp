@@ -2,6 +2,7 @@
 
 
 Board::Board()
+	:w_piece_data(Color::W), b_piece_data(Color::B)
 {
 	for(int x = 0; x < 8; x++)
 	{
@@ -67,16 +68,34 @@ ID Board::GetID(const Pos& get_pos) const
 	return board[get_pos.x][get_pos.y]->GetID();
 }
 
+
 int Board::MovePiece(const Pos& orig, const Pos& dest)
 {
 	if(IfExist(orig) == false)
 		return -1;
 		
 	if(IfExist(dest) == true)
+	{
+		Color dest_color = GetColor(dest);
+
+		if(dest_color == Color::W)
+			w_piece_data.Delete(dest);
+		else
+			b_piece_data.Delete(dest);
+
 		delete board[dest.x][dest.y];
+	}
 
 	board[dest.x][dest.y] = board[orig.x][orig.y];
 	board[orig.x][orig.y] = nullptr;
+
+	Color orig_color = GetColor(dest);
+
+	if(orig_color == Color::W)
+		w_piece_data.ChangePos(dest, orig);
+	else
+		b_piece_data.ChangePos(dest, orig);
+
 
 	return 0;
 }

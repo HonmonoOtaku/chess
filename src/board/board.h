@@ -3,6 +3,7 @@
 
 #include "../piece/piece.h"
 #include "../piece/each_piece.h"
+#include "piece_data_list.h"
 
 #include <list>
 #include <iostream>
@@ -16,6 +17,8 @@ class Board
 {
 private:
 	Piece * board[8][8];
+	Piece_Data_List w_piece_data;
+	Piece_Data_List b_piece_data;
 
 public:
 	Board();
