@@ -2,6 +2,7 @@
 #define _PIECE_DATA_LIST
 
 #include "../piece/piece.h"
+#include "../piece/each_piece.h"
 
 #include <list>
 #include <iostream>
@@ -11,29 +12,29 @@
 using namespace std;
 #endif //_U_
 
-typedef struct Piece_Data
-{
-	Pos pos;
-	ID id;
-	
-	Piece_Data(const Pos& pos, const ID id);
-}Piece_Data;
 
-class Piece_Data_List
+class Piece_List
 {
 private:
-	list<Piece_Data> piece_data_list;
+	list<Piece *> piece_data_list;
 
 public:
-	Piece_Data_List(const Color color);
-	void PushBack(const Piece_Data& node);
+	Piece_List(const Color color);
+
+	void PushBack(const Piece& input_piece);
+
 	int Delete(const Pos& node_pos);
+
 	int ChangePos(const Pos& change_pos, const Pos& pos);
-	int ChangeId(const Pos& change_pos, const ID id);
-	int GetNode(const Pos& node_pos, Piece_Data& return_node) const;
+
+	int GetPiece(const Pos& node_pos, Piece& return_piece) const;
+
+	int GetPieceMoveList(const Pos& orig, const Pos& dest, list<Pos>& move_list) const;
+
+	void GetList(list<Piece *>& piece_data_list) const;
+
 	void ShowList(void) const;
 
-	void GetList(list<Piece_Data>& piece_data_list) const;
 };
 
 #endif // _PIECE_DATA_LIST

@@ -83,7 +83,7 @@ int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> 
 	return 0;
 }
 
-void Board::GetPieceDataList(const Color color, list<Piece_Data>& piece_data_list) const
+void Board::GetPieceDataList(const Color color, list<Piece *>& piece_data_list) const
 {
 	if(color == Color::W)
 		w_piece_data.GetList(piece_data_list);
@@ -122,6 +122,7 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 
 	return 0;
 }
+
 
 int Board::ShowBoard(void) const
 {

@@ -1,63 +1,81 @@
 #include "piece_data_list.h"
 
-Piece_Data::Piece_Data(const Pos& pos, const ID id)
-	:pos(pos), id(id)
-{
-}
 
-Piece_Data_List::Piece_Data_List(const Color color)
+Piece_List::Piece_List(const Color color)
 {
 	if(color == Color::W)
 	{
-		piece_data_list.push_back(Piece_Data(Pos(0, 0),ID::R));
-		piece_data_list.push_back(Piece_Data(Pos(0, 1),ID::N));
-		piece_data_list.push_back(Piece_Data(Pos(0, 2),ID::B));
-		piece_data_list.push_back(Piece_Data(Pos(0, 3),ID::Q));
-		piece_data_list.push_back(Piece_Data(Pos(0, 4),ID::K));
-		piece_data_list.push_back(Piece_Data(Pos(0, 5),ID::B));
-		piece_data_list.push_back(Piece_Data(Pos(0, 6),ID::N));
-		piece_data_list.push_back(Piece_Data(Pos(0, 7),ID::R));
-		piece_data_list.push_back(Piece_Data(Pos(1, 0),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 1),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 2),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 3),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 4),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 5),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 6),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(1, 7),ID::P));
+		piece_data_list.push_back(new Rook(Color::W, Pos(0, 0)));
+		piece_data_list.push_back(new Night(Color::W, Pos(1, 0)));
+		piece_data_list.push_back(new Bishop(Color::W, Pos(2,0 )));
+		piece_data_list.push_back(new Queen(Color::W, Pos(3, 0)));
+		piece_data_list.push_back(new King(Color::W, Pos(4, 0)));
+		piece_data_list.push_back(new Bishop(Color::W, Pos(5,0)));
+		piece_data_list.push_back(new Night(Color::W, Pos(6,0)));
+		piece_data_list.push_back(new Rook(Color::W, Pos(7, 0)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(0, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(1, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(2, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(3, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(4, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(5, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(6, 1)));
+		piece_data_list.push_back(new Pone(Color::W, Pos(7, 1)));
 	}
 	else
 	{
-		piece_data_list.push_back(Piece_Data(Pos(7, 0),ID::R));
-		piece_data_list.push_back(Piece_Data(Pos(7, 1),ID::N));
-		piece_data_list.push_back(Piece_Data(Pos(7, 2),ID::B));
-		piece_data_list.push_back(Piece_Data(Pos(7, 3),ID::Q));
-		piece_data_list.push_back(Piece_Data(Pos(7, 4),ID::K));
-		piece_data_list.push_back(Piece_Data(Pos(7, 5),ID::B));
-		piece_data_list.push_back(Piece_Data(Pos(7, 6),ID::N));
-		piece_data_list.push_back(Piece_Data(Pos(7, 7),ID::R));
-		piece_data_list.push_back(Piece_Data(Pos(6, 0),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 1),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 2),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 3),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 4),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 5),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 6),ID::P));
-		piece_data_list.push_back(Piece_Data(Pos(6, 7),ID::P));
+		piece_data_list.push_back(new Rook(Color::B, Pos(0, 7)));
+		piece_data_list.push_back(new Night(Color::B, Pos(1, 7)));
+		piece_data_list.push_back(new Bishop(Color::B, Pos(2, 7)));
+		piece_data_list.push_back(new Queen(Color::B, Pos(3, 7)));
+		piece_data_list.push_back(new King(Color::B, Pos(4, 7)));
+		piece_data_list.push_back(new Bishop(Color::B, Pos(5, 7)));
+		piece_data_list.push_back(new Night(Color::B, Pos(6, 7)));
+		piece_data_list.push_back(new Rook(Color::B, Pos(7, 7)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(0, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(1, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(2, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(3, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(4, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(5, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(6, 6)));
+		piece_data_list.push_back(new Pone(Color::B, Pos(7, 6)));
 	}
 }
 
-void Piece_Data_List::PushBack(const Piece_Data& node)
+void Piece_List::PushBack(const Piece& input_piece)
 {
-	piece_data_list.push_back(node);
+	ID input_piece_id = input_piece.GetID();
+	switch(input_piece_id)
+	{
+	case ID::K:
+		piece_data_list.push_back(new King(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	case ID::Q:
+		piece_data_list.push_back(new Queen(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	case ID::B:
+		piece_data_list.push_back(new Bishop(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	case ID::N:
+		piece_data_list.push_back(new Night(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	case ID::R:
+		piece_data_list.push_back(new Rook(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	case ID::P:
+		piece_data_list.push_back(new Pone(input_piece.GetColor(), input_piece.GetPos()));
+		break;
+	}
 }
 
-int Piece_Data_List::Delete(const Pos& node_pos)
+int Piece_List::Delete(const Pos& node_pos)
 {
-	for(list<Piece_Data>::iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
+	for(list<Piece *>::iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
 	{
-		if(iter->pos == node_pos)
+		if((*iter)->GetPos() == node_pos)
 		{
+			delete *iter;
 			piece_data_list.erase(iter);
 			return 0;
 		}
@@ -66,13 +84,13 @@ int Piece_Data_List::Delete(const Pos& node_pos)
 	return -1;
 }
 
-int Piece_Data_List::ChangePos(const Pos& change_pos, const Pos& pos)
+int Piece_List::ChangePos(const Pos& change_pos, const Pos& pos)
 {
-	for(list<Piece_Data>::iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
+	for(list<Piece *>::iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
 	{
-		if(iter->pos == change_pos)
+		if((*iter)->GetPos() == change_pos)
 		{
-			iter->pos = change_pos;
+			(*iter)->SetPos(change_pos);
 			return 0;
 		}
 	}
@@ -80,13 +98,13 @@ int Piece_Data_List::ChangePos(const Pos& change_pos, const Pos& pos)
 	return -1;
 }
 
-int Piece_Data_List::ChangeId(const Pos& change_pos, const ID id)
+int Piece_List::GetPieceMoveList(const Pos& orig, const Pos& dest, list<Pos>& move_list) const
 {
-	for(list<Piece_Data>::iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
+	for(list<Piece *>::const_iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
 	{
-		if(iter->pos == change_pos)
+		if((*iter)->GetPos() == orig)
 		{
-			iter->id = id;
+			(*iter)->GetMoveList(dest, move_list);
 			return 0;
 		}
 	}
@@ -94,28 +112,15 @@ int Piece_Data_List::ChangeId(const Pos& change_pos, const ID id)
 	return -1;
 }
 
-int Piece_Data_List::GetNode(const Pos& node_pos, Piece_Data& return_node) const
-{
-	for(list<Piece_Data>::const_iterator iter = piece_data_list.begin(); iter != piece_data_list.end(); ++iter)
-	{
-		if(iter->pos == node_pos)
-		{
-			return_node = *iter;
-			return 0;
-		}
-	}
-
-	return -1;
-}
-
-void Piece_Data_List::ShowList(void) const
+void Piece_List::ShowList(void) const
 {
 	cout << "******list_data*****" << endl;
 	cout << "lenght : " << piece_data_list.size() << endl;
 	cout << "contents : ";
 	for(auto& i : piece_data_list)
-	{
-		switch(i.id)
+	{		
+		ID piece_id = i->GetID();
+		switch(piece_id)
 		{
 			case ID::K:
 				cout << "K ";
@@ -142,7 +147,7 @@ void Piece_Data_List::ShowList(void) const
 	
 }
 
-void Piece_Data_List::GetList(list<Piece_Data>& piece_data_list) const
+void Piece_List::GetList(list<Piece *>& piece_data_list) const
 {
 	piece_data_list = this->piece_data_list;
 }

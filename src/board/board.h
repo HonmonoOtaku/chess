@@ -17,8 +17,8 @@ class Board
 {
 private:
 	Piece * board[8][8];
-	Piece_Data_List w_piece_data;
-	Piece_Data_List b_piece_data;
+	Piece_List w_piece_data;
+	Piece_List b_piece_data;
 
 public:
 	Board();
@@ -30,7 +30,7 @@ public:
 
 	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const;
 
-	void GetPieceDataList(const Color color, list<Piece_Data>& piece_data_list) const;
+	void GetPieceDataList(const Color color, list<Piece *>& piece_data_list) const;
 
 	int MovePiece(const Pos& orig, const Pos& dest);
 
