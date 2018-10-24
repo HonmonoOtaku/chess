@@ -32,6 +32,8 @@ public:
 	int ChangeId(const Pos& change_pos, const ID id);
 	int GetNode(const Pos& node_pos, Piece_Data& return_node) const;
 	void ShowList(void) const;
+
+	void GetList(list<Piece_Data>& piece_data_list) const;
 };
 
 #endif // _PIECE_DATA_LIST

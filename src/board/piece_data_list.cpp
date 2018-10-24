@@ -141,3 +141,9 @@ void Piece_Data_List::ShowList(void) const
 	cout << endl;
 	
 }
+
+void Piece_Data_List::GetList(list<Piece_Data>& piece_data_list) const
+{
+	piece_data_list = this->piece_data_list;
+}
+
