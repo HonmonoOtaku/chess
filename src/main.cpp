@@ -4,27 +4,16 @@
 #include "piece/pos.h"
 #include "piece/each_piece.h"
 #include "board/board.h"
+#include "board/piece_data_list.h"
 
 using namespace std;
 
 int main(void)
 {
-	Board board;
-	board.ShowBoard();
+	Piece_Data_List data_list(Color::W);
+	data_list.Delete(Pos(0 ,0));
+	data_list.ShowList();
 
-	while(true)
-	{
-		Pos orig;
-		Pos dest;
+	return 0;
 
-		cout << "orig: ";
-		cin >> orig.x >> orig.y;
-		cout << "\n";
-		cout << "dest: ";
-		cin >> dest.x >> dest.y;
-		cout << "\n";
-
-		cout << "result :" << board.MovePiece(orig, dest) << endl;
-		board.ShowBoard();
-	}
 }
