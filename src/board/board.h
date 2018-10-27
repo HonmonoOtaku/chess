@@ -33,7 +33,9 @@ public:
 
 	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const;
 
-	void GetAllPiecePos(list<Pos> pos_list);
+	void GetAllPiecePos(const Color color, list<Pos> pos_list);
+
+	int GetKingPos(const Color color, Pos& king_pos) const;
 
 	int MovePiece(const Pos& orig, const Pos& dest);
 
