@@ -2,7 +2,7 @@
 
 
 Board::Board()
-	:w_piece_data(Color::W), b_piece_data(Color::B)
+	:w_piece_list(Color::W), b_piece_list(Color::B)
 {
 	for(int x = 0; x < 8; x++)
 	{
@@ -83,14 +83,10 @@ int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> 
 	return 0;
 }
 
-void Board::GetPieceDataList(const Color color, list<Piece *>& piece_data_list) const
+void Board::GetAllPiecePos(list<Pos> pos_list)
 {
-	if(color == Color::W)
-		w_piece_data.GetList(piece_data_list);
-	else
-		b_piece_data.GetList(piece_data_list);
+		
 }
-
 
 int Board::MovePiece(const Pos& orig, const Pos& dest)
 {
@@ -101,10 +97,7 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 	{
 		Color dest_color = GetColor(dest);
 
-		if(dest_color == Color::W)
-			w_piece_data.Delete(dest);
-		else
-			b_piece_data.Delete(dest);
+		GetPieceList(dest_color).Delete(dest);
 
 		delete board[dest.x][dest.y];
 	}
@@ -114,11 +107,7 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 
 	Color orig_color = GetColor(dest);
 
-	if(orig_color == Color::W)
-		w_piece_data.ChangePos(dest, orig);
-	else
-		b_piece_data.ChangePos(dest, orig);
-
+	GetPieceList(orig_color).ChangePos(dest, orig);
 
 	return 0;
 }

@@ -3,7 +3,7 @@
 
 #include "../piece/piece.h"
 #include "../piece/each_piece.h"
-#include "piece_data_list.h"
+#include "piece_list.h"
 
 #include <list>
 #include <iostream>
@@ -17,8 +17,11 @@ class Board
 {
 private:
 	Piece * board[8][8];
-	Piece_List w_piece_data;
-	Piece_List b_piece_data;
+	Piece_List w_piece_list;
+	Piece_List b_piece_list;
+
+	inline Piece_List& GetPieceList(const Color color);
+	inline Piece_List& GetReversePieceList(const Color color);
 
 public:
 	Board();
@@ -30,11 +33,26 @@ public:
 
 	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const;
 
-	void GetPieceDataList(const Color color, list<Piece *>& piece_data_list) const;
+	void GetAllPiecePos(list<Pos> pos_list);
 
 	int MovePiece(const Pos& orig, const Pos& dest);
 
 	int ShowBoard(void) const;
 };
 
+inline Piece_List& Board::GetPieceList(const Color color)
+{
+	if(color == Color::W)
+		return w_piece_list;
+	else
+		return b_piece_list;
+}
+
+inline Piece_List& Board::GetReversePieceList(const Color color)
+{
+	if(color == Color::B)
+		return w_piece_list;
+	else
+		return b_piece_list;
+}
 #endif // _BOARD_H_

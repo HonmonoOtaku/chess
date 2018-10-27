@@ -16,7 +16,7 @@ using namespace std;
 class Piece_List
 {
 private:
-	list<Piece *> piece_data_list;
+	list<Piece *> piece_list;
 
 public:
 	Piece_List(const Color color);
@@ -31,7 +31,7 @@ public:
 
 	int GetPieceMoveList(const Pos& orig, const Pos& dest, list<Pos>& move_list) const;
 
-	void GetList(list<Piece *>& piece_data_list) const;
+	void GetAllPiecePos(list<Pos>& pos_list);
 
 	void ShowList(void) const;
 
