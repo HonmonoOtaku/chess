@@ -112,7 +112,7 @@ int Piece_List::GetPieceMoveList(const Pos& orig, const Pos& dest, list<Pos>& mo
 	return -1;
 }
 
-void Piece_List::GetAllPiecePos(list<Pos>& pos_list)
+void Piece_List::GetAllPiecePos(list<Pos>& pos_list) const
 {
 	pos_list.clear();
 

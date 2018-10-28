@@ -17,11 +17,11 @@ class Board
 {
 private:
 	Piece * board[8][8];
-	Piece_List w_piece_list;
-	Piece_List b_piece_list;
+	mutable Piece_List w_piece_list;
+	mutable Piece_List b_piece_list;
 
-	inline Piece_List& GetPieceList(const Color color);
-	inline Piece_List& GetReversePieceList(const Color color);
+	inline Piece_List& GetPieceList(const Color color) const;
+	inline Piece_List& GetReversePieceList(const Color color) const;
 
 public:
 	Board();
@@ -31,9 +31,9 @@ public:
 	Color GetColor(const Pos& get_pos) const;
 	ID GetID(const Pos& get_pos) const;
 
-	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const;
+	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos>& move_list) const;
 
-	void GetAllPiecePos(const Color color, list<Pos> pos_list);
+	void GetAllPiecePos(const Color color, list<Pos>& pos_list) const;
 
 	int GetKingPos(const Color color, Pos& king_pos) const;
 
@@ -42,7 +42,7 @@ public:
 	int ShowBoard(void) const;
 };
 
-inline Piece_List& Board::GetPieceList(const Color color)
+inline Piece_List& Board::GetPieceList(const Color color) const
 {
 	if(color == Color::W)
 		return w_piece_list;
@@ -50,7 +50,7 @@ inline Piece_List& Board::GetPieceList(const Color color)
 		return b_piece_list;
 }
 
-inline Piece_List& Board::GetReversePieceList(const Color color)
+inline Piece_List& Board::GetReversePieceList(const Color color) const
 {
 	if(color == Color::B)
 		return w_piece_list;

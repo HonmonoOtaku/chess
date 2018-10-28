@@ -32,14 +32,10 @@ Board::Board()
 		for(int y = 2; y < 6; y++)
 			board[x][y] = nullptr;
 
-	cout << "hallo" << endl;
 }
 
 Board::~Board()
 {
-	if(board[0][5] == nullptr)
-		cout << "hallo" << endl;
-
 	for(int y = 0; y < 8; y++)
 		for(int x = 0; x < 8; x++)
 		{
@@ -69,7 +65,7 @@ ID Board::GetID(const Pos& get_pos) const
 }
 
 
-int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> move_list) const
+int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos>& move_list) const
 {
 	if(IfExist(orig_pos) == false)
 		return -1;
@@ -83,7 +79,7 @@ int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos> 
 	return 0;
 }
 
-void Board::GetAllPiecePos(const Color color, list<Pos> pos_list)
+void Board::GetAllPiecePos(const Color color, list<Pos> &pos_list) const
 {
 	GetPieceList(color).GetAllPiecePos(pos_list);
 }

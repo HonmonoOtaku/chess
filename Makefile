@@ -10,7 +10,8 @@ RESULT_DIR = object_file
 #can be modified
 DIRS = ./src \
 			 ./src/piece \
-			 ./src/board
+			 ./src/board \
+			 ./src/move_check
 
 SRCS_DIRS = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.cpp))
 SRCS = $(notdir $(SRCS_DIRS))
