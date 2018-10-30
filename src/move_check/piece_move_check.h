@@ -1,5 +1,5 @@
-#ifndef _PIECE_MOVE_CHECK_LIST_H_
-#define _PIECE_MOVE_CHECK_LIST_H_
+#ifndef _PIECE_MOVE_CHECK_H_
+#define _PIECE_MOVE_CHECK_H_
 
 #include "../board/board.h"
 #include "../board/piece_list.h"
@@ -13,6 +13,7 @@ using namespace std;
 
 enum class King_State
 {
+	ERROR,
 	SAFE,
 	CHECK,
 	CHECKMATE
@@ -20,12 +21,10 @@ enum class King_State
 
 namespace piece_move_check
 {
-	King_State GetKingState(const Color king_color, const Board& board);;
 	int KingMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board); 
 	King_State GetKingState(const Color king_color, const Board& board, const Pos * ignore_pos); 
 	int NormalMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board); 
 	int PieceMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board); 
-
 }
 
-#endif // _PIECE_MOVE_CHECK_LIST_H_
+#endif // _PIECE_MOVE_CHECK_H_

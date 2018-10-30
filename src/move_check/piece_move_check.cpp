@@ -72,12 +72,15 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 	if(ignore_pos != nullptr)
 	{
 		for(list<Pos>::iterator iter = all_piece_pos.begin(); iter != all_piece_pos.end(); ++iter)
-					if((*iter) == *ignore_pos)
-					{
-						all_piece_pos.erase(iter);
-						break;
-					}
+				if((*iter) == *ignore_pos)
+				{
+					all_piece_pos.erase(iter);
+					break;
+				}
 	}
+
+	if(all_piece_pos.size() == 0)
+		return King_State::ERROR;
 
 	//check if king is check
 	for(const Pos& i : all_piece_pos)
@@ -86,7 +89,8 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 		if(board.GetPieceMoveList(i, king_pos, move_list) == 0)
 		{
 			move_list.pop_back();
-
+			move_list.pop_front();
+			
 			for(const Pos& i_1 : move_list)
 				if(board.IfExist(i_1) == true)
 					goto FAILED;
@@ -110,6 +114,7 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 					if(board.GetPieceMoveList(i, Pos(king_pos.x + x_1, king_pos.y + y_1), move_list) == 0)
 					{
 						move_list.pop_back();
+						move_list.pop_front();
 
 						for(const Pos& i_1 : move_list)
 							if(board.IfExist(i_1) == true)

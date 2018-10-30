@@ -64,6 +64,49 @@ ID Board::GetID(const Pos& get_pos) const
 	return board[get_pos.x][get_pos.y]->GetID();
 }
 
+int Board::AddPiece(const ID add_id, const Pos& add_pos, const Color add_color)
+{
+	if(IfExist(add_pos) == true)
+		return -1;
+
+	switch(add_id)
+	{
+	case ID::K:
+		board[add_pos.x][add_pos.y] = new King(add_color, add_pos);
+		break;
+	case ID::Q:
+		board[add_pos.x][add_pos.y] = new Queen(add_color, add_pos);
+		break;
+	case ID::B:
+		board[add_pos.x][add_pos.y] = new Bishop(add_color, add_pos);
+		break;
+	case ID::N:
+		board[add_pos.x][add_pos.y] = new Night(add_color, add_pos);
+		break;
+	case ID::R:
+		board[add_pos.x][add_pos.y] = new Rook(add_color, add_pos);
+		break;
+	case ID::P:
+		board[add_pos.x][add_pos.y] = new Pone(add_color, add_pos);
+		break;
+	}
+
+	GetPieceList(add_color).PushBack(*board[add_pos.x][add_pos.y]);
+
+	return 0;
+
+}
+int Board::DeletePiece(const Pos& delete_pos)
+{
+	if(IfExist(delete_pos) == false)
+		return -1;
+		
+	GetPieceList(GetColor(delete_pos)).Delete(delete_pos);
+	delete board[delete_pos.x][delete_pos.y];
+	board[delete_pos.x][delete_pos.y] = nullptr;
+
+	return 0;
+}
 
 int Board::GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos>& move_list) const
 {
@@ -89,10 +132,13 @@ int Board::GetKingPos(const Color color, Pos& king_pos) const
 	for(int x = 0; x < 8; x++)
 		for(int y = 0; y < 8; y++)
 		{
-			if(board[x][y]->GetColor() == Color::W && board[x][y]->GetID() == ID::K)
+			if(IfExist(Pos(x, y)) == true)
 			{
-				king_pos = board[x][y]->GetPos();
-				return 0;
+				if(board[x][y]->GetColor() == Color::W && board[x][y]->GetID() == ID::K)
+				{
+					king_pos = board[x][y]->GetPos();
+					return 0;
+				}
 			}
 		}
 

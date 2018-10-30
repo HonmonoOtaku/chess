@@ -13,6 +13,7 @@
 using namespace std;
 #endif //_U_
 
+
 class Board
 {
 private:
@@ -30,6 +31,10 @@ public:
 	bool IfExist(const Pos& check_pos) const;
 	Color GetColor(const Pos& get_pos) const;
 	ID GetID(const Pos& get_pos) const;
+
+	int AddPiece(const ID add_id, const Pos& add_pos, const Color add_color);
+	int DeletePiece(const Pos& delete_pos);
+
 
 	int GetPieceMoveList(const Pos& orig_pos, const Pos& dest_pos, list<Pos>& move_list) const;
 
