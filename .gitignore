@@ -2,5 +2,5 @@
 *.o
 
 tags
-chess
+./chess
 depend_file
