@@ -39,5 +39,5 @@ depend:
 -include $(RESULT_DIR)/$(DEPEND_FILE)
 
 clean:
-	rm chess
+	rm pvp_chess
 	cd $(RESULT_DIR) && make clean

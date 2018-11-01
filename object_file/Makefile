@@ -1,7 +1,7 @@
 .SUFFIXES : .cpp.o
 CC = g++
 CFLAGS= -g -Werror -Wall -std=c++11
-TARGET = chess
+TARGET = pvp_chess
 
 OBJECTS = $(wildcard *.o)
 
@@ -9,7 +9,7 @@ OBJECTS = $(wildcard *.o)
 all : $(TARGET)
 
 $(TARGET) : $(OBJECTS)
-	$(CC) -o ../$@ $(OBJECTS)
+	$(CC) $(CFLAGS) -o ../$@ $(OBJECTS)
 
 clean:
 	rm $(OBJECTS) 
