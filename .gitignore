@@ -2,5 +2,5 @@
 *.o
 
 tags
-./chess
+pvp_chess
 depend_file
