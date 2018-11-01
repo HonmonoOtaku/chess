@@ -2,7 +2,7 @@
 #define _CHESS_H_
 
 #include "../board/board.h"
-#include "../move_check/piece_move_check.cpp"
+#include "../move_check/piece_move_check.h"
 
 class Chess
 {
