@@ -21,6 +21,7 @@ public:
 	Chess();	
 
 	int MovePiece(const Pos& orig_pos, const Pos& dest_pos);
+	void ReturnBoard(ID chess_board[][8]) const;
 };
 
 inline King_State& Chess::GetKingState(const Color king_color) const
