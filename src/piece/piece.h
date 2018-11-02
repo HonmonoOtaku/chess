@@ -31,6 +31,15 @@ enum class ID
 	P
 };
 
+typedef struct Piece_Data
+{
+	Pos pos;
+	ID id;
+	Color color;
+	bool if_exist;
+
+}Piece_Data;
+
 class Piece
 {
 private:

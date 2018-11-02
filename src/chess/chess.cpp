@@ -38,7 +38,7 @@ int Chess::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 	return 0;
 }
 
-void Chess::ReturnBoard(ID chess_board[][8]) const
+void Chess::ReturnBoard(Piece_Data chess_board[][8]) const
 {
 	this->board.GetBoard(chess_board);	
 }
