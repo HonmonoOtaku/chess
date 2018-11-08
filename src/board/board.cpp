@@ -169,22 +169,23 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 	return 0;
 }
 
-void Board::GetBoard(Piece_Data board_data[][8]) const
+void Board::GetBoard(Piece_Data_Board& data_board) const
 {
 	for(int x = 0; x < 8; x++)
 		for(int y = 0; y < 8; y++)
 		{
+			Pos cur_pos = Pos(x, y);
 
-			if(IfExist(Pos(x,y)) == false)
+			if(IfExist(cur_pos) == false)
 			{
-				board_data[x][y].if_exist = false;
+				data_board.data_board[x][y].if_exist = false;
 				continue;
 			}
 
-			board_data[x][y].color = GetColor(Pos(x,y));
-			board_data[x][y].id = GetID(Pos(x,y));
-			board_data[x][y].pos = Pos(x, y);
-
+			data_board.data_board[x][y].if_exist = true;
+			data_board.data_board[x][y].id = GetID(cur_pos);
+			data_board.data_board[x][y].color = GetColor(cur_pos);
+			data_board.data_board[x][y].pos = cur_pos;
 		}
 }
 

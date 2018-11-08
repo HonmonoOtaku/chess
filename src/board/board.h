@@ -44,7 +44,7 @@ public:
 
 	int MovePiece(const Pos& orig, const Pos& dest);
 
-	void GetBoard(Piece_Data board_data[][8]) const;
+	void GetBoard(Piece_Data_Board& data_board) const;
 
 	int ShowBoard(void) const;
 };

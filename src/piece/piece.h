@@ -13,7 +13,7 @@ using namespace std;
 enum class Color
 {
 	W,
-	B
+	B,
 };
 
 namespace color
@@ -36,9 +36,29 @@ typedef struct Piece_Data
 	Pos pos;
 	ID id;
 	Color color;
-	bool if_exist;
+
+	Piece_Data();
+	Piece_Data(const Pos& init_pos, const ID init_id, const Color init_color);
 
 }Piece_Data;
+
+typedef struct Piece_Data_Board_Node : Piece_Data
+{
+	bool if_exist;
+
+	Piece_Data_Board_Node();
+	Piece_Data_Board_Node(const bool if_exist ,const Pos& init_pos, const ID init_id, const Color init_color);
+		
+}Piece_Data_Board_Node;
+
+typedef struct Piece_Data_Board
+{
+	Piece_Data_Board_Node data_board[8][8];
+
+	Piece_Data_Board(bool if_init);
+
+}Piece_Data_Board;
+
 
 class Piece
 {

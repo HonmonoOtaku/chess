@@ -25,22 +25,9 @@ int main(void)
 
 	chess_board.ShowBoard();
 
-	list<Pos> piece_list;
-	chess_board.GetAllPiecePos(Color::W, piece_list);
+	Piece_Data_Board data_board(false);
+	chess_board.GetBoard(data_board);
 	
-//	cout << "white piece list" << endl;
-//	for(const auto& i : piece_list)
-//		cout << "(" << i.x << "," << i.y << ")" << endl;
-//
-//	chess_board.GetAllPiecePos(Color::B, piece_list);
-//	cout << "black piece list" << endl;
-//	for(const auto& i : piece_list)
-//		cout << "(" << i.x << "," << i.y << ")" << endl;
-
-	if(piece_move_check::GetKingState(Color::W, chess_board, nullptr) == King_State::CHECK)
-		cout <<"OK" << endl;
-	if(piece_move_check::GetKingState(Color::W, chess_board, nullptr) == King_State::SAFE)
-		cout <<"OK1" << endl;
 
 
 	return 0;
