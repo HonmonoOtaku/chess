@@ -31,6 +31,11 @@ enum class ID
 	P
 };
 
+namespace id
+{
+	char IDtochar(const ID id);
+}
+
 typedef struct Piece_Data
 {
 	Pos pos;

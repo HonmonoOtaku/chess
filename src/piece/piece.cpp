@@ -50,6 +50,27 @@ Piece_Data_Board_Node::Piece_Data_Board_Node(const bool if_exist ,const Pos& pos
 	this->if_exist = if_exist;
 }
 
+char id::IDtochar(const ID id)
+{
+	switch(id)
+	{
+	case ID::K:
+		return 'K';
+	case ID::Q:
+		return 'Q';
+	case ID::R:
+		return 'R';
+	case ID::B:
+		return 'B';
+	case ID::N:
+		return 'N';
+	case ID::P:
+		return 'P';
+	}
+
+	return -1;
+}
+
 Piece_Data_Board::Piece_Data_Board(bool if_init)
 {	
 	if(if_init == true)
