@@ -5,6 +5,7 @@
 #include "piece/each_piece.h"
 #include "board/board.h"
 #include "move_check/piece_move_check.h"
+#include "tui/tui.h"
 
 using namespace std;
 
@@ -12,21 +13,21 @@ int main(void)
 {	
 	Board chess_board;
 
-	for(int x = 0; x < 8; x++)
-		for(int y = 0; y < 2; y++)
-			chess_board.DeletePiece(Pos(x, y));
+	Show_Board show_board;
 
-	for(int x = 0; x < 8; x++)
-		for(int y = 6; y < 8; y++)
-			chess_board.DeletePiece(Pos(x, y));
+	for(int i = 0; i < 9; i++)
+	{
+		show_board.ShowBoard();
+		Pos orig_pos;
+		Pos dest_pos;
+		show_board.SelectPos(orig_pos);
+		show_board.SelectPos(dest_pos);
+		show_board.MovePiece(orig_pos, dest_pos);
+	}
 
-	chess_board.AddPiece(ID::K, Pos(3, 0), Color::W);
-	chess_board.AddPiece(ID::R, Pos(3, 7), Color::B);
 
-	chess_board.ShowBoard();
-
-	Piece_Data_Board data_board(false);
-	chess_board.GetBoard(data_board);
+	int temp = 0;
+	cin >> temp;
 	
 
 

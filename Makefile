@@ -12,7 +12,8 @@ DIRS = ./src \
 			 ./src/piece \
 			 ./src/board \
 			 ./src/move_check \
-			 ./src/chess
+			 ./src/chess \
+			 ./src/tui
 
 SRCS_DIRS = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.cpp))
 SRCS = $(notdir $(SRCS_DIRS))
