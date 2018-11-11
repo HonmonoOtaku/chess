@@ -33,7 +33,7 @@ enum class ID
 
 namespace id
 {
-	char IDtochar(const ID id);
+	char IDtoChar(const ID id);
 }
 
 typedef struct Piece_Data

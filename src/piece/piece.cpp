@@ -50,7 +50,7 @@ Piece_Data_Board_Node::Piece_Data_Board_Node(const bool if_exist ,const Pos& pos
 	this->if_exist = if_exist;
 }
 
-char id::IDtochar(const ID id)
+char id::IDtoChar(const ID id)
 {
 	switch(id)
 	{
@@ -77,21 +77,23 @@ Piece_Data_Board::Piece_Data_Board(bool if_init)
 	{
 		for(int x = 0; x < 8; x++)
 		{
-			data_board[0][x].if_exist = true;		
-			data_board[1][x].if_exist = true;		
-			data_board[2][x].if_exist = false;		
-			data_board[3][x].if_exist = false;		
-			data_board[4][x].if_exist = false;		
-			data_board[5][x].if_exist = false;		
-			data_board[6][x].if_exist = true;		
-			data_board[7][x].if_exist = true;			
+			data_board[x][0].if_exist = true;		
+			data_board[x][1].if_exist = true;		
+			data_board[x][2].if_exist = false;		
+			data_board[x][3].if_exist = false;		
+			data_board[x][4].if_exist = false;		
+			data_board[x][5].if_exist = false;		
+			data_board[x][6].if_exist = true;		
+			data_board[x][7].if_exist = true;			
 
-			data_board[0][x].color = Color::W;		
-			data_board[1][x].color = Color::W;		
+			data_board[x][0].color = Color::W;		
+			data_board[x][1].color = Color::W;		
+                    
+			data_board[x][6].color = Color::B;		
+			data_board[x][7].color = Color::B;		
 
-			data_board[6][x].color = Color::B;		
-			data_board[7][x].color = Color::B;		
-
+			data_board[x][1].id = ID::P;
+			data_board[x][6].id = ID::P;
 		}
 
 		data_board[0][0].id = ID::R;
