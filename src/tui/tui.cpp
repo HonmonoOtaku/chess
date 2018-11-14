@@ -36,10 +36,12 @@ int Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 
 void Show_Board::SelectPos(Pos& select_pos) const
 {		
-	Pos init_screen_curser_pos = GetScreenPos(Pos(0, 0));	
+	static Pos point_pos = Pos(0, 0);
+	//cout << "before_point_pos : [" << before_point_pos.x << ", " << before_point_pos.y << "]" << endl;
+
+	Pos init_screen_curser_pos = GetScreenPos(point_pos);	
 	move(init_screen_curser_pos.y, init_screen_curser_pos.x);
 
-	Pos point_pos(0, 0);
 
 	while(true)
 	{
@@ -79,6 +81,7 @@ void Show_Board::SelectPos(Pos& select_pos) const
 				move(0, 0);
 				select_pos = point_pos;
 				RefreshBoard();
+
 
 				return;
 		}
