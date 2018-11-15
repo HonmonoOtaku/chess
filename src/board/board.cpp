@@ -46,23 +46,6 @@ Board::~Board()
 		}
 }
 
-bool Board::IfExist(const Pos& check_pos) const
-{
-	if(board[check_pos.x][check_pos.y] == nullptr)
-		return false;
-	else
-		return true;
-}
-
-Color Board::GetColor(const Pos& get_pos) const
-{
-	return board[get_pos.x][get_pos.y]->GetColor();
-}
-
-ID Board::GetID(const Pos& get_pos) const
-{
-	return board[get_pos.x][get_pos.y]->GetID();
-}
 
 int Board::AddPiece(const ID add_id, const Pos& add_pos, const Color add_color)
 {

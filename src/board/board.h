@@ -28,9 +28,9 @@ public:
 	Board();
 	~Board();
 
-	bool IfExist(const Pos& check_pos) const;
-	Color GetColor(const Pos& get_pos) const;
-	ID GetID(const Pos& get_pos) const;
+	inline bool IfExist(const Pos& check_pos) const;
+	inline Color GetColor(const Pos& get_pos) const;
+	inline ID GetID(const Pos& get_pos) const;
 
 	int AddPiece(const ID add_id, const Pos& add_pos, const Color add_color);
 	int DeletePiece(const Pos& delete_pos);
@@ -64,4 +64,23 @@ inline Piece_List& Board::GetReversePieceList(const Color color) const
 	else
 		return b_piece_list;
 }
+
+inline bool Board::IfExist(const Pos& check_pos) const
+{
+	if(board[check_pos.x][check_pos.y] == nullptr)
+		return false;
+	else
+		return true;
+}
+
+inline Color Board::GetColor(const Pos& get_pos) const
+{
+	return board[get_pos.x][get_pos.y]->GetColor();
+}
+
+inline ID Board::GetID(const Pos& get_pos) const
+{
+	return board[get_pos.x][get_pos.y]->GetID();
+}
+
 #endif // _BOARD_H_

@@ -78,11 +78,26 @@ public:
 
 	void SetPos(const Pos& dest);
 
-	ID GetID(void) const;
-	Color GetColor(void) const;
-	Pos GetPos(void) const;
+	inline ID GetID(void) const;
+	inline Color GetColor(void) const;
+	inline Pos GetPos(void) const;
 
 	virtual int GetMoveList(const Pos& dest, list<Pos>& move_list) const = 0;
 };
+
+inline ID Piece::GetID(void) const
+{
+	return m_id;
+}
+
+inline Color Piece::GetColor(void) const
+{
+	return m_color;
+}
+
+inline Pos Piece::GetPos(void) const
+{
+	return m_pos;
+}
 
 #endif // _PIECE_H_
