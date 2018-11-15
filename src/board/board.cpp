@@ -149,13 +149,13 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 {
 	if(IfExist(orig) == false)
 		return -1;
+
+	if(orig == dest)
+		return -2;
 		
 	if(IfExist(dest) == true)
 	{
-		Color dest_color = GetColor(dest);
-
-		GetPieceList(dest_color).Delete(dest);
-
+		GetPieceList(GetColor(dest)).Delete(dest);
 		delete board[dest.x][dest.y];
 	}
 

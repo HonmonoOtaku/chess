@@ -24,6 +24,9 @@ int Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 	if(data_board.data_board[orig_pos.x][orig_pos.y].if_exist == false)
 		return -1;
 
+	if(orig_pos == dest_pos)
+		return -2;
+
 		
 	data_board.data_board[dest_pos.x][dest_pos.y] = data_board.data_board[orig_pos.x][orig_pos.y];	
 	data_board.data_board[orig_pos.x][orig_pos.y].if_exist = false;
