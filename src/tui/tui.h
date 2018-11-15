@@ -14,9 +14,16 @@ private:
 
 	void InitNcurses(void);
 	void EndNcurses(void);
+
+
 protected:
+
+	static const int white_screen_color;
+	static const int black_screen_color;
+
 	Ncurses_Setting();
 	~Ncurses_Setting();
+
 
 };
 
@@ -24,10 +31,14 @@ class Show_Board : public Ncurses_Setting
 {
 private:
 	Piece_Data_Board data_board;
+
 	
 private:
 	Pos GetScreenPos(const Pos& pos) const;
 	void RefreshBoard(void) const;
+
+	int PrintPiece(const int x, const int y, const ID piece_id, const Color piece_color) const;
+	
 
 public:
 	Show_Board();

@@ -29,7 +29,7 @@ int Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 	data_board.data_board[orig_pos.x][orig_pos.y].if_exist = false;
 
 	Pos screen_pos = GetScreenPos(dest_pos);
-	mvaddch(screen_pos.y, screen_pos.x, id::IDtoChar(data_board.data_board[dest_pos.x][dest_pos.y].id));	
+	PrintPiece(screen_pos.x, screen_pos.y, data_board.data_board[dest_pos.x][dest_pos.y].id, data_board.data_board[dest_pos.x][dest_pos.y].color);
 
 	return 0;
 }
@@ -99,6 +99,14 @@ void Show_Board::RefreshBoard(void) const
 	refresh();
 }
 
+int Show_Board::PrintPiece(const int x, const int y, const ID piece_id, const Color piece_color) const
+{
+	if(piece_color == Color::W)			
+		return mvaddch(y, x, id::IDtoChar(piece_id) | COLOR_PAIR(white_screen_color));
+	else
+		return mvaddch(y, x, id::IDtoChar(piece_id) | COLOR_PAIR(black_screen_color));
+}
+
 void Show_Board::ShowBoard() const
 {
 	for(int y = 0; y < 8; y++)
@@ -108,7 +116,7 @@ void Show_Board::ShowBoard() const
 			Pos screen_pos = GetScreenPos(Pos(x, y));
 
 			if(data_board.data_board[x][y].if_exist == true)
-				mvaddch(screen_pos.y, screen_pos.x, id::IDtoChar(data_board.data_board[x][y].id));
+					PrintPiece(screen_pos.x , screen_pos.y, data_board.data_board[x][y].id, data_board.data_board[x][y].color);
 			else
 				mvaddch(screen_pos.y, screen_pos.x, '*');
 		}
