@@ -1,10 +1,10 @@
 #include "tui.h"
 
-int Ncurses_Setting::class_count = 0;
-const int Ncurses_Setting::white_screen_color = 1;
-const int Ncurses_Setting::black_screen_color = 2;
+int tui::Ncurses_Setting::class_count = 0;
+const int tui::Ncurses_Setting::white_screen_color = 1;
+const int tui::Ncurses_Setting::black_screen_color = 2;
 
-Ncurses_Setting::Ncurses_Setting()
+tui::Ncurses_Setting::Ncurses_Setting()
 {
 	class_count++;
 
@@ -13,7 +13,7 @@ Ncurses_Setting::Ncurses_Setting()
 	
 }
 
-Ncurses_Setting::~Ncurses_Setting()
+tui::Ncurses_Setting::~Ncurses_Setting()
 {
 	class_count--;
 
@@ -21,7 +21,7 @@ Ncurses_Setting::~Ncurses_Setting()
 		EndNcurses();
 }
 
-void Ncurses_Setting::InitNcurses(void)
+void tui::Ncurses_Setting::InitNcurses(void)
 {
 	initscr();
 	cbreak();
@@ -34,7 +34,7 @@ void Ncurses_Setting::InitNcurses(void)
 	init_pair(black_screen_color, 128, 0); 
 }
 
-void Ncurses_Setting::EndNcurses(void)
+void tui::Ncurses_Setting::EndNcurses(void)
 {
 	endwin();
 }

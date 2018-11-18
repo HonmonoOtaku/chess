@@ -1,12 +1,12 @@
 #include "tui.h"
 
-Show_Board::Show_Board()
+tui::Show_Board::Show_Board()
 	:data_board(true)
 {
 	
 }
 
-Pos Show_Board::GetScreenPos(const Pos& pos) const
+Pos tui::Show_Board::GetScreenPos(const Pos& pos) const
 {	
 	const unsigned int begin_x = 140;
 	const unsigned int begin_y = 20;
@@ -14,12 +14,12 @@ Pos Show_Board::GetScreenPos(const Pos& pos) const
 	return Pos(3 * ( pos.x + 1 )  - 1 + begin_x , 2 * ( (7 - pos.y) + 1)  - 1 + begin_y );
 }
 
-void Show_Board::ModifyBoard(const Piece_Data_Board& data_board)
+void tui::Show_Board::ModifyBoard(const Piece_Data_Board& data_board)
 {
 	this->data_board = data_board;
 }
 
-int Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
+int tui::Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 {
 	if(data_board.data_board[orig_pos.x][orig_pos.y].if_exist == false)
 		return -1;
@@ -37,7 +37,7 @@ int Show_Board::MovePiece(const Pos& orig_pos, const Pos& dest_pos)
 	return 0;
 }
 
-void Show_Board::SelectPos(Pos& select_pos) const
+void tui::Show_Board::SelectPos(Pos& select_pos) const
 {		
 	static Pos point_pos = Pos(0, 0);
 	//cout << "before_point_pos : [" << before_point_pos.x << ", " << before_point_pos.y << "]" << endl;
@@ -97,12 +97,12 @@ void Show_Board::SelectPos(Pos& select_pos) const
 	}
 }
 
-void Show_Board::RefreshBoard(void) const
+void tui::Show_Board::RefreshBoard(void) const
 {
 	refresh();
 }
 
-int Show_Board::PrintPiece(const int x, const int y, const ID piece_id, const Color piece_color) const
+int tui::Show_Board::PrintPiece(const int x, const int y, const ID piece_id, const Color piece_color) const
 {
 	if(piece_color == Color::W)			
 		return mvaddch(y, x, id::IDtoChar(piece_id) | COLOR_PAIR(white_screen_color));
@@ -110,7 +110,7 @@ int Show_Board::PrintPiece(const int x, const int y, const ID piece_id, const Co
 		return mvaddch(y, x, id::IDtoChar(piece_id) | COLOR_PAIR(black_screen_color));
 }
 
-void Show_Board::ShowBoard() const
+void tui::Show_Board::ShowBoard() const
 {
 	for(int y = 0; y < 8; y++)
 	{

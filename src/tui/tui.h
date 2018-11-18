@@ -6,6 +6,9 @@
 
 #include <ncurses.h>
 
+namespace tui
+{
+
 class Ncurses_Setting
 {
 private:
@@ -50,4 +53,5 @@ public:
 	void ShowBoard(void) const;
 };
 
+}
 #endif // _TUI_H_
