@@ -5,13 +5,25 @@ int piece_move_check::PieceMoveCheck(const Pos& orig_pos, const Pos& dest_pos, c
 	if(board.IfExist(orig_pos) == false)
 		return -1;
 
+	if( board.IfExist(dest_pos) == true )
+		if( board.GetColor(dest_pos) == board.GetColor(orig_pos) )
+			return -2;
+
 	ID orig_id = board.GetID(orig_pos);
 	
-	if(orig_id ==ID::K)
+	switch(orig_id)
+	{
+	case ID::K:
 			return KingMoveCheck(orig_pos, dest_pos, board);
-	else
+	case ID::P:
+			return PoneMoveCheck(orig_pos, dest_pos, board);
+	case ID::N:
+			return NightMoveCheck(orig_pos, dest_pos, board);
+	default:
 			return NormalMoveCheck(orig_pos, dest_pos, board);	
+	}
 	
+	return 0;
 }
 
 int piece_move_check::NormalMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board)
@@ -31,11 +43,57 @@ int piece_move_check::NormalMoveCheck(const Pos& orig_pos, const Pos& dest_pos, 
 		}
 	}
 
-	if(board.IfExist(dest_pos) == true)
-		if(board.GetColor(dest_pos) == board.GetColor(orig_pos))
-			return -3;
-
 	return 0;
+}
+
+int piece_move_check::PoneMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board)
+{
+	Color orig_color = board.GetColor(orig_pos);
+	
+	//exception for Pone	
+	
+	if(orig_color == Color::W)
+	{
+
+	Pos up_right(orig_pos.x + 1, orig_pos.y + 1);
+	Pos up_left(orig_pos.x - 1, orig_pos.y + 1);
+
+	if(board.IfExist(up_right) == true && up_right== dest_pos && board.GetColor(up_right) != board.GetColor(orig_pos))
+		return 0;
+
+	if(board.IfExist(up_left) == true && up_left == dest_pos && board.GetColor(up_left) != board.GetColor(orig_pos))
+		return 0;
+	}
+
+	else
+	{
+
+	Pos down_right(orig_pos.x + 1, orig_pos.y - 1);
+	Pos down_left(orig_pos.x - 1, orig_pos.y - 1);
+
+	if( board.IfExist(down_right) == true && down_right == dest_pos && board.GetColor(down_right) != board.GetColor(orig_pos) )
+		return 0;
+
+	if( board.IfExist(down_left) == true && down_left == dest_pos && board.GetColor(down_left) != board.GetColor(orig_pos) )
+		return 0;
+	}
+
+		
+	list<Pos> move_list;
+	if(board.GetPieceMoveList(orig_pos, dest_pos, move_list) == 0)
+		return 0;
+
+	return -1;
+}
+
+int piece_move_check::NightMoveCheck(const Pos& orig_pos, const Pos& dest_pos, const Board& board)
+{
+	list<Pos> move_list;
+
+	if(board.GetPieceMoveList(orig_pos, dest_pos, move_list) != 0)
+		return -1;
+	else 
+		return 0;
 }
 
 int piece_move_check::KingMoveCheck(const Pos& orig_pos, const Pos& dest_pos,const Board& board) 
@@ -100,7 +158,7 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 			break;
 		}
 
-		FAILED: ;
+		FAILED:;
 	}
 
 	if(king_state == King_State::CHECK)
@@ -120,19 +178,14 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 							if(board.IfExist(i_1) == true)
 								goto FAILED_1;
 					}
-
 				}
-
 			}
 
 		king_state = King_State::CHECKMATE;
 
 FAILED_1:;
-			
 	}
 
-	
-	
 	return king_state;
 }
 

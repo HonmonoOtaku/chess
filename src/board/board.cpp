@@ -144,6 +144,7 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 
 	board[dest.x][dest.y] = board[orig.x][orig.y];
 	board[orig.x][orig.y] = nullptr;
+	board[dest.x][dest.y]->SetPos(dest);
 
 	Color orig_color = GetColor(dest);
 

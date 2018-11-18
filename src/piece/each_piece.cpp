@@ -52,7 +52,7 @@ int King::GetMoveList(const Pos& dest, list<Pos>& move_list) const
 {
 	if( !(abs(dest.x - GetPos().x) <= 1 && abs(dest.y - GetPos().y) <= 1) )
 		return -1;
-	
+
 	move_list.push_back(GetPos());
 	move_list.push_back(dest);	
 
@@ -169,8 +169,8 @@ int Night::GetMoveList(const Pos& dest, list<Pos>& move_list) const
 
 int Pone::GetMoveList(const Pos& dest, list<Pos>& move_list) const
 {
-	if( (GetColor() == Color::W && dest.y == 4 && GetPos().y == 6 && (dest.x - GetPos().x == 0)) |
-			(GetColor() == Color::B && dest.y == 1 && GetPos().y == 3 && (dest.x - GetPos().x == 0)) )
+	if( (GetColor() == Color::B && dest.y == 4 && GetPos().y == 6 && (dest.x == GetPos().x)) |
+			(GetColor() == Color::W && dest.y == 3 && GetPos().y == 1 && (dest.x == GetPos().x)) )
 	{	
 		move_list.push_back(GetPos());
 		move_list.push_back(Pos(GetPos().x, (GetPos().y + dest.y)/2));	

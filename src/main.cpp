@@ -13,22 +13,35 @@ int main(void)
 {	
 	Board chess_board;
 
-	Show_Board show_board;
+	tui::Show_Board tui_board;
 
-	for(int i = 0; i < 9; i++)
+	for(int i = 0; i < 20; i++)
 	{
-		show_board.ShowBoard();
+		tui_board.ShowBoard();
+
 		Pos orig_pos;
 		Pos dest_pos;
-		show_board.SelectPos(orig_pos);
-		show_board.SelectPos(dest_pos);
-		show_board.MovePiece(orig_pos, dest_pos);
+
+		tui_board.SelectPos(orig_pos);
+		tui_board.SelectPos(dest_pos);
+
+		cout << "orig_pos : ( " << orig_pos.x << ", " << orig_pos.y << ")" << endl; 
+		cout << "dest_pos : ( " << dest_pos.x << ", " << dest_pos.y << ")" << endl; 
+	
+		if(piece_move_check::PieceMoveCheck(orig_pos, dest_pos, chess_board) != 0)
+		{
+			std::cout << "wrong_move" << std::endl;	
+			continue;
+		}
+		
+		tui_board.MovePiece(orig_pos, dest_pos);
+		chess_board.MovePiece(orig_pos, dest_pos);
+		
 	}
 
+	int temp 	 = 0;
+	std::cin >> temp;
 
-	int temp = 0;
-	cin >> temp;
-	
 
 
 	return 0;
