@@ -8,8 +8,8 @@ tui::Show_Board::Show_Board()
 
 Pos tui::Show_Board::GetScreenPos(const Pos& pos) const
 {	
-	const unsigned int begin_x = 140;
-	const unsigned int begin_y = 20;
+	const unsigned int begin_x = 10;
+	const unsigned int begin_y = 10;
 
 	return Pos(3 * ( pos.x + 1 )  - 1 + begin_x , 2 * ( (7 - pos.y) + 1)  - 1 + begin_y );
 }

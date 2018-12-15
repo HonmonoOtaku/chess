@@ -84,11 +84,11 @@ int Piece_List::Delete(const Pos& node_pos)
 	return -1;
 }
 
-int Piece_List::ChangePos(const Pos& change_pos, const Pos& pos)
+int Piece_List::ChangePos(const Pos& orig_pos, const Pos& change_pos)
 {
 	for(list<Piece *>::iterator iter = piece_list.begin(); iter != piece_list.end(); ++iter)
 	{
-		if((*iter)->GetPos() == change_pos)
+		if((*iter)->GetPos() == orig_pos)
 		{
 			(*iter)->SetPos(change_pos);
 			return 0;

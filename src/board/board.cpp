@@ -110,14 +110,14 @@ void Board::GetAllPiecePos(const Color color, list<Pos> &pos_list) const
 	GetPieceList(color).GetAllPiecePos(pos_list);
 }
 
-int Board::GetKingPos(const Color color, Pos& king_pos) const
+int Board::GetKingPos(const Color king_color, Pos& king_pos) const
 {
 	for(int x = 0; x < 8; x++)
 		for(int y = 0; y < 8; y++)
 		{
 			if(IfExist(Pos(x, y)) == true)
 			{
-				if(board[x][y]->GetColor() == Color::W && board[x][y]->GetID() == ID::K)
+				if(board[x][y]->GetColor() == king_color && board[x][y]->GetID() == ID::K)
 				{
 					king_pos = board[x][y]->GetPos();
 					return 0;
@@ -148,7 +148,7 @@ int Board::MovePiece(const Pos& orig, const Pos& dest)
 
 	Color orig_color = GetColor(dest);
 
-	GetPieceList(orig_color).ChangePos(dest, orig);
+	GetPieceList(orig_color).ChangePos(orig, dest);
 
 	return 0;
 }

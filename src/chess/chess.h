@@ -1,8 +1,10 @@
 #ifndef _CHESS_H_
 #define _CHESS_H_
 
+#include "../piece/pos.h"
 #include "../board/board.h"
 #include "../move_check/piece_move_check.h"
+#include <ncurses.h>
 
 class Chess
 {
@@ -22,6 +24,7 @@ public:
 
 	int MovePiece(const Pos& orig_pos, const Pos& dest_pos);
 	void ReturnBoard(Piece_Data_Board& data_board) const;
+	void ShowKingState(void) const;
 };
 
 inline King_State& Chess::GetKingState(const Color king_color) const

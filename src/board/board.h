@@ -40,7 +40,7 @@ public:
 
 	void GetAllPiecePos(const Color color, list<Pos>& pos_list) const;
 
-	int GetKingPos(const Color color, Pos& king_pos) const;
+	int GetKingPos(const Color king_color, Pos& king_pos) const;
 
 	int MovePiece(const Pos& orig, const Pos& dest);
 

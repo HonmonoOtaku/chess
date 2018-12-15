@@ -120,13 +120,15 @@ int piece_move_check::KingMoveCheck(const Pos& orig_pos, const Pos& dest_pos,con
 King_State piece_move_check::GetKingState(const Color king_color, const Board& board, const Pos * ignore_pos)
 {
 	King_State king_state = King_State::SAFE;
-	Pos king_pos(0 ,0);
+	Pos king_pos;
 	
-	board.GetKingPos(king_color, king_pos);
+	if(board.GetKingPos(king_color, king_pos) != 0)
+		return King_State::DEAD;
 
 	list<Pos> all_piece_pos;
 	board.GetAllPiecePos(color::GetReverseColor(king_color), all_piece_pos);
 
+	//erase ignore_pos piece
 	if(ignore_pos != nullptr)
 	{
 		for(list<Pos>::iterator iter = all_piece_pos.begin(); iter != all_piece_pos.end(); ++iter)
@@ -137,20 +139,17 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 				}
 	}
 
-	if(all_piece_pos.size() == 0)
-		return King_State::ERROR;
-
 	//check if king is check
-	for(const Pos& i : all_piece_pos)
+	for(const Pos& i_pos : all_piece_pos)
 	{
 		list<Pos> move_list;
-		if(board.GetPieceMoveList(i, king_pos, move_list) == 0)
+		if(board.GetPieceMoveList(i_pos, king_pos, move_list) == 0)
 		{
 			move_list.pop_back();
 			move_list.pop_front();
 			
-			for(const Pos& i_1 : move_list)
-				if(board.IfExist(i_1) == true)
+			for(const Pos& j_pos : move_list)
+				if(board.IfExist(j_pos) == true)
 					goto FAILED;
 
 				
@@ -163,29 +162,74 @@ King_State piece_move_check::GetKingState(const Color king_color, const Board& b
 
 	if(king_state == King_State::CHECK)
 	{
+		int check_count = 0;
+		int king_kill_event = 0;
 		for(int x_1 = -1; x_1 < 2; x_1++)
 			for(int y_1 = -1; y_1 < 2; y_1++)
 			{
-				for(const Pos& i : all_piece_pos)
+				if( !( 0 <= king_pos.x + x_1 && king_pos.x + x_1 <= 7  &&  0 <= king_pos.y + y_1 && king_pos.y + y_1 <= 7 ) )
+					continue;
+				
+				if( board.IfExist(Pos(king_pos.x + x_1, king_pos.y + y_1)) == true)
+					if(board.GetColor(Pos(king_pos.x + x_1, king_pos.y + y_1)) == king_color )
+						continue;
+
+				check_count++;
+				for(const Pos& i_pos : all_piece_pos)
 				{
 					list<Pos> move_list;
-					if(board.GetPieceMoveList(i, Pos(king_pos.x + x_1, king_pos.y + y_1), move_list) == 0)
+					if(board.GetPieceMoveList(i_pos, Pos(king_pos.x + x_1, king_pos.y + y_1), move_list) == 0)
 					{
 						move_list.pop_back();
 						move_list.pop_front();
 
-						for(const Pos& i_1 : move_list)
-							if(board.IfExist(i_1) == true)
+						for(const Pos& j_pos : move_list)
+							if(board.IfExist(j_pos) == true)
 								goto FAILED_1;
+						king_kill_event++;
 					}
+					FAILED_1:;
 				}
 			}
 
-		king_state = King_State::CHECKMATE;
-
-FAILED_1:;
+		if( check_count == king_kill_event)
+			king_state = King_State::CHECKMATE;
 	}
 
 	return king_state;
 }
 
+int piece_move_check::GetKingAimPiece(const Color king_color, const Board& board, const Pos * ignore_pos, Pos& aim_pos)
+{
+	if(GetKingState(king_color, board, ignore_pos) != King_State::CHECK)
+		return -1;
+
+
+	Pos king_pos;
+	board.GetKingPos(king_color, king_pos);
+
+	list<Pos> all_piece_pos;
+	board.GetAllPiecePos(color::GetReverseColor(king_color), all_piece_pos);
+
+	for(const Pos& i_pos : all_piece_pos)
+	{
+		list<Pos> move_list;
+		if(board.GetPieceMoveList(i_pos, king_pos, move_list) == 0)
+		{
+			move_list.pop_back();
+			move_list.pop_front();
+			
+			for(const Pos& j_pos : move_list)
+				if(board.IfExist(j_pos) == true)
+					goto FAILED;
+
+				
+			aim_pos = i_pos;
+			break;
+		}
+
+		FAILED:;
+	}
+
+	return 0;
+}

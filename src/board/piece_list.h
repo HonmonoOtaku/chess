@@ -25,7 +25,7 @@ public:
 
 	int Delete(const Pos& node_pos);
 
-	int ChangePos(const Pos& change_pos, const Pos& pos);
+	int ChangePos(const Pos& orig_pos, const Pos& change_pos);
 
 	int GetPiece(const Pos& node_pos, Piece& return_piece) const;
 
